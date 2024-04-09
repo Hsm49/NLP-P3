@@ -155,11 +155,17 @@ def generar_diccionario(vectores):
     return diccionario
 
 def cosine(x, y):
-	val = sum(x[index] * y[index] for index in range(len(x)))
-	sr_x = math.sqrt(sum(x_val**2 for x_val in x))
-	sr_y = math.sqrt(sum(y_val**2 for y_val in y))
-	res = val/(sr_x*sr_y)
-	return (res)
+    # Calcular el producto punto entre x y y
+    val = sum(x[index] * y[index] for index in range(len(x)))
+    # Calcular las normas de x y y
+    sr_x = math.sqrt(sum(x_val**2 for x_val in x))
+    sr_y = math.sqrt(sum(y_val**2 for y_val in y))
+    # Evitar división por cero si alguna de las normas es cero
+    if sr_x == 0 or sr_y == 0:
+        return 0  # O manejar de otra manera si es necesario
+    # Calcular la similitud de coseno
+    res = val / (sr_x * sr_y)
+    return res
 
 def calcular_similitud(myDoc, allDoc):
     resultados = {}
